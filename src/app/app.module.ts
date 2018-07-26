@@ -1,21 +1,22 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppComponent } from './app.component';
-
 import { registerLocaleData } from '@angular/common';
 import localeNL from '@angular/common/locales/nl-BE';
-import { SearchPipe } from './search.pipe';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppComponent } from './app.component';
+import { ExpensesModule } from './expenses/expenses.module';
+
 
 registerLocaleData(localeNL);
 
 @NgModule({
   declarations: [
-    AppComponent, SearchPipe
+    AppComponent,
   ],
   imports: [
-    BrowserModule, NgbModule.forRoot(), FormsModule, ReactiveFormsModule
+    BrowserModule, NgbModule.forRoot(), FormsModule, ReactiveFormsModule,
+    ExpensesModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'nl-BE' }

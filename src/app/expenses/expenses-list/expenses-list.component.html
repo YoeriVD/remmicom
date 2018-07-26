@@ -1,0 +1,20 @@
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>description</th>
+        <th>amount</th>
+        <th>date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let expense of expenses" [class.expensive]="expense.amount > 5000">
+        <td>{{ expense.description }}</td>
+        <td>{{ expense.amount | currency : 'EUR' }}</td>
+        <td>{{ expense.date | date : 'yyyy-MM-dd' }}</td>
+        <td>
+          <a href="#" (click)="deleteExpense(expense)">delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
