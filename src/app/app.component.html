@@ -2,20 +2,16 @@
   <span class="navbar-brand mb-0 h1">Expenses</span>
 </nav>
 <div class="container">
-  <div class="card mb-3">
-    <div class="card-header d-flex justify-content-between">
+  <app-card>
+    <div header class="d-flex justify-content-between">
       <span class="card-title">New expense</span>
       <button type="submit" class="btn btn-outline-primary" (click)="form.addExpense()" [disabled]="form.expenseForm.invalid">Submit</button>
     </div>
-    <div class="card-body">
-      <app-expenses-form #form="expenseFormComponent" (newExpense)="addExpenseToList($event)"></app-expenses-form>
-    </div>
-  </div>
+    <app-expenses-form content #form="expenseFormComponent" (newExpense)="addExpenseToList($event)"></app-expenses-form>
 
-  <div class="card">
-    <div class="card-header">
-      <input class="form-control" placeholder="search expenses" [formControl]="search" />
-    </div>
-    <app-expenses-list [expenses]="expenses | search : (search$ | async)"></app-expenses-list> 
-  </div>
+  </app-card>
+  <app-card>
+    <input header class="form-control" placeholder="search expenses" [formControl]="search" />
+    <app-expenses-list content [expenses]="expenses | search : (search$ | async)"></app-expenses-list>
+  </app-card>
 </div>

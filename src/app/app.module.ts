@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { ExpensesModule } from './expenses/expenses.module';
+import { CardComponent } from './card/card.component';
 
 
 registerLocaleData(localeNL);
@@ -13,6 +14,7 @@ registerLocaleData(localeNL);
 @NgModule({
   declarations: [
     AppComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule, NgbModule.forRoot(), FormsModule, ReactiveFormsModule,
