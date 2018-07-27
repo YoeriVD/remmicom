@@ -1,13 +1,13 @@
 import { registerLocaleData } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeNL from '@angular/common/locales/nl-BE';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutesModule } from './app-routes.module';
 import { AppComponent } from './app.component';
-import { ExpensesModule } from './expenses/expenses.module';
-import { CardComponent } from './card/card.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
 import { HttpErrorResponseToastInterceptor } from './http-error.interceptor';
 
 
@@ -16,11 +16,11 @@ registerLocaleData(localeNL);
 @NgModule({
   declarations: [
     AppComponent,
-    CardComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule, NgbModule.forRoot(), FormsModule, ReactiveFormsModule,
-    ExpensesModule, HttpClientModule
+    HttpClientModule, AppRoutesModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'nl-BE' },

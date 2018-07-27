@@ -1,17 +1,10 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light bg-light mb-1">
   <span class="navbar-brand mb-0 h1">Expenses</span>
+  <form class="form-inline">
+    <a routerLink="/home" routerLinkActive="active" class="btn btn-outline-success" href="#">Home</a>
+    <a routerLink="/expenses" routerLinkActive="active"  class="btn btn-outline-success ml-2" href="#">Expenses</a>
+  </form>
 </nav>
 <div class="container">
-  <app-card>
-    <div header class="d-flex justify-content-between">
-      <span class="card-title">New expense</span>
-      <button type="submit" class="btn btn-outline-primary" (click)="form.addExpense()" [disabled]="form.expenseForm.invalid">Submit</button>
-    </div>
-    <app-expenses-form content #form="expenseFormComponent" (newExpense)="addExpenseToList($event)"></app-expenses-form>
-
-  </app-card>
-  <app-card>
-    <input header class="form-control" placeholder="search expenses" [formControl]="search" />
-    <app-expenses-list content [expenses]="expenses$ | async"></app-expenses-list>
-  </app-card>
+  <router-outlet></router-outlet>
 </div>

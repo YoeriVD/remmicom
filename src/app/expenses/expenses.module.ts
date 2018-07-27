@@ -1,15 +1,24 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ExpensesListComponent } from './expenses-list/expenses-list.component';
-import { SearchPipe } from './search.pipe';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CardComponent } from './card/card.component';
+import { ExpenseComponent } from './expense/expense.component';
 import { ExpensesFormComponent } from './expenses-form/expenses-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ExpensesService, ExpensesServiceMock } from './expenses.service';
-import { ZoomDirective, ZoomTableDirective, TableRow } from './zoom.directive';
+import { ExpensesListComponent } from './expenses-list/expenses-list.component';
+import { ExpensesPageComponent } from './expenses-page/expenses-page.component';
+import { ExpensesRoutesModule } from './expenses-routes.module';
+import { ExpensesService } from './expenses.service';
+import { SearchPipe } from './search.pipe';
+import { TableRow, ZoomDirective, ZoomTableDirective } from './zoom.directive';
+
+export * from './expenses-form/expenses-form.component';
+export * from './expenses-list/expenses-list.component';
+export * from './expenses-page/expenses-page.component';
+export * from './expenses.service';
 
 @NgModule({
   imports: [
-    CommonModule, ReactiveFormsModule
+    CommonModule, ReactiveFormsModule, FormsModule, ExpensesRoutesModule
   ],
   declarations: [
     ExpensesListComponent,
@@ -17,13 +26,18 @@ import { ZoomDirective, ZoomTableDirective, TableRow } from './zoom.directive';
     ExpensesFormComponent,
     ZoomDirective,
     ZoomTableDirective,
-    TableRow
+    TableRow,
+    ExpenseComponent,
+    ExpensesPageComponent,
+    CardComponent
   ],
   exports: [
     ExpensesListComponent,
+    ExpensesPageComponent,
     SearchPipe,
     ExpensesFormComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CardComponent
   ],
   providers: [
     { provide: ExpensesService, useClass: ExpensesService }
