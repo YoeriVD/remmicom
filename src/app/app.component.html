@@ -12,6 +12,6 @@
   </app-card>
   <app-card>
     <input header class="form-control" placeholder="search expenses" [formControl]="search" />
-    <app-expenses-list content [expenses]="expenses | search : (search$ | async)"></app-expenses-list>
+    <app-expenses-list content [expenses]="expenses$ | async"></app-expenses-list>
   </app-card>
 </div>

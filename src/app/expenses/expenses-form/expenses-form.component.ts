@@ -23,6 +23,7 @@ export class ExpensesFormComponent implements OnInit {
   addExpense() {
     if (this.expenseForm.valid) {
       this.newExpense.emit(this.expenseForm.value);
+      this.expenseForm.reset();
     }
   }
 }

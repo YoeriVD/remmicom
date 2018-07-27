@@ -1,25 +1,36 @@
 import { Injectable } from "@angular/core";
 import { Expense } from "./expense";
+import { HttpClient, HttpParams } from "@angular/common/http";
 
 @Injectable()
 export class ExpensesService {
-    private expenses: Expense[] = [
-        { description: 'Laptop', amount: 1550.5, date: new Date(2018, 5, 17) },
-        { description: 'Auto', amount: 55235.5, date: new Date(2018, 7, 7) },
-        { description: 'Lunch', amount: 15.5, date: new Date(2018, 3, 28) },
-    ];
-    getExpenses() {
-        return this.expenses;
+    private _baseUrl = 'http://localhost:9999/expenses'
+
+    constructor(private http: HttpClient) {
+
     }
 
-    addExpense(expense : Expense) {
-        this.expenses.push(expense);
+    getExpenses(searchValue?: string) {
+        if (searchValue) {
+            const params = new HttpParams({
+                fromObject: {
+                    q : searchValue
+                }
+            });
+            return this.http.get<Expense[]>(this._baseUrl, {
+                params: params
+            });
+        } else return this.http.get<Expense[]>(this._baseUrl);
     }
 
-    deleteExpense(expense : Expense) {
-        const index = this.expenses.indexOf(expense);
-        this.expenses.slice(index, 1);
-        return this.expenses;
+    addExpense(expense: Expense) {
+        return this.http.post<Expense>(this._baseUrl, expense);
+    }
+
+    deleteExpense(expense: Expense) {
+        // const index = this.expenses.indexOf(expense);
+        // this.expenses.slice(index, 1);
+        // return this.expenses;
     }
 }
 
@@ -32,11 +43,11 @@ export class ExpensesServiceMock {
         return this.expenses;
     }
 
-    addExpense(expense : Expense) {
+    addExpense(expense: Expense) {
         this.expenses.push(expense);
     }
 
-    deleteExpense(expense : Expense) {
+    deleteExpense(expense: Expense) {
         const index = this.expenses.indexOf(expense);
         this.expenses.slice(index, 1);
         return this.expenses;

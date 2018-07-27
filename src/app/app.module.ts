@@ -7,6 +7,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { ExpensesModule } from './expenses/expenses.module';
 import { CardComponent } from './card/card.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpErrorResponseToastInterceptor } from './http-error.interceptor';
 
 
 registerLocaleData(localeNL);
@@ -18,10 +20,11 @@ registerLocaleData(localeNL);
   ],
   imports: [
     BrowserModule, NgbModule.forRoot(), FormsModule, ReactiveFormsModule,
-    ExpensesModule
+    ExpensesModule, HttpClientModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'nl-BE' }
+    { provide: LOCALE_ID, useValue: 'nl-BE' },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorResponseToastInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, startWith } from 'rxjs/operators';
+import { merge, Observable, ReplaySubject, combineLatest } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, startWith, map, switchMap, takeUntil } from 'rxjs/operators';
 import { Expense } from './expenses/expense';
 import { ExpensesService } from './expenses/expenses.service';
 @Component({
@@ -13,27 +13,43 @@ export class AppComponent implements OnInit {
 
 
   search = new FormControl();
-  search$: Observable<string>;
-  expenses: Expense[];
+  search$: Observable<Expense[]>;
+  newExpenses$ = new ReplaySubject<Expense[]>(1);
+  expenses$: Observable<Expense[]>;
 
   constructor(private expensesService: ExpensesService) {
 
   }
-
   ngOnInit(): void {
-    this.expenses = this.expensesService.getExpenses();
+
     this.search$ = this.search
       .valueChanges
       .pipe(
-        startWith(''),
         filter(value => !value || value.length > 1),
-        debounceTime(250),
-        distinctUntilChanged()
+        debounceTime(200),
+        distinctUntilChanged(),
+        switchMap(searchValue => this.expensesService.getExpenses(searchValue))
       );
+
+    this.expenses$ = merge(
+      this.expensesService.getExpenses(),
+      this.search$,
+      this.newExpenses$
+    );
   }
 
   addExpenseToList(expense) {
-    this.expensesService.addExpense(expense);
+    combineLatest(
+      this.expenses$,
+      this.expensesService.addExpense(expense)
+    )
+      .pipe(
+        map(([expenses, newExpense]) => {
+          expenses.push(newExpense);
+          return expenses;
+        }),
+        takeUntil(this.newExpenses$)
+      ).subscribe(expenses => this.newExpenses$.next(expenses));
   }
 
 
