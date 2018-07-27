@@ -10,15 +10,12 @@ import { ExpensesService } from './expenses/expenses.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
-
   search = new FormControl();
   search$: Observable<Expense[]>;
   newExpenses$ = new ReplaySubject<Expense[]>(1);
   expenses$: Observable<Expense[]>;
 
   constructor(private expensesService: ExpensesService) {
-
   }
   ngOnInit(): void {
 
