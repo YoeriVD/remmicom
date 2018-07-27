@@ -1,6 +1,6 @@
-import { ContentChildren, Directive, ElementRef, HostListener, Input, QueryList, Renderer2, AfterContentInit } from "@angular/core";
-import { from, fromEvent, merge, Observable } from "rxjs";
-import { flatMap, map } from "rxjs/operators";
+import { ContentChildren, Directive, ElementRef, HostListener, Input, QueryList, Renderer2, AfterContentInit } from '@angular/core';
+import { from, fromEvent, merge, Observable } from 'rxjs';
+import { flatMap, map } from 'rxjs/operators';
 
 @Directive({
     selector: '[zoom]'
@@ -8,16 +8,16 @@ import { flatMap, map } from "rxjs/operators";
 export class ZoomDirective {
     @Input() zoom = 1.1;
     constructor(private element: ElementRef) {
-        console.log('attaching directive!', element)
+        console.log('attaching directive!', element);
     }
     @HostListener('mouseenter')
     onMouseEnter() {
         (<HTMLElement>this.element.nativeElement).style.transform = `scale(${this.zoom || 1.1})`;
-        (<HTMLElement>this.element.nativeElement).style.transition = "all 0.5s ease-in-out";
+        (<HTMLElement>this.element.nativeElement).style.transition = 'all 0.5s ease-in-out';
     }
     @HostListener('mouseleave')
     onMouseLeave() {
-        this.element.nativeElement.style.transform = "";
+        this.element.nativeElement.style.transform = '';
     }
 }
 
@@ -41,7 +41,7 @@ export class ZoomTableDirective implements AfterContentInit {
                     map(_ => el)
                 )
         )
-    );
+    )
 
     ngAfterContentInit(): void {
         // merge current + all new
@@ -61,7 +61,7 @@ export class ZoomTableDirective implements AfterContentInit {
         mouseenter$.subscribe(row => {
             this.renderer.setStyle(row, 'transform', 'scale(1.1)');
             this.renderer.setStyle(row, 'transition', 'all 0.5s ease-in-out');
-        })
-        mouseleave$.subscribe(row => this.renderer.removeStyle(row, 'transform'))
+        });
+        mouseleave$.subscribe(row => this.renderer.removeStyle(row, 'transform'));
     }
 }

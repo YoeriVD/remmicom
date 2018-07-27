@@ -1,7 +1,7 @@
-import { TestBed, ComponentFixture } from "@angular/core/testing";
-import { ExpensesListComponent } from "./expenses-list.component";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-describe("ExpenseListComponent", () => {
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { ExpensesListComponent } from './expenses-list.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+describe('ExpenseListComponent', () => {
     let fixture: ComponentFixture<ExpensesListComponent>;
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -17,13 +17,13 @@ describe("ExpenseListComponent", () => {
         component.expenses = [
             { description: '', amount: 15, date: new Date(2018, 5, 5) },
             { description: '', amount: 15, date: new Date(2018, 5, 5) }
-        ]
+        ];
         fixture.detectChanges();
         expect(
             fixture.nativeElement.querySelectorAll('tbody tr').length
         ).toBe(2);
     });
-})
+});
 
 
 

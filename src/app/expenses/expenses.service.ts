@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Expense } from "./expense";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { Expense } from './expense';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class ExpensesService {
-    private _baseUrl = 'http://localhost:9999/expenses'
+    private _baseUrl = 'http://localhost:9999/expenses';
 
     constructor(private http: HttpClient) {
 
@@ -22,7 +22,7 @@ export class ExpensesService {
             return this.http.get<Expense[]>(this._baseUrl, {
                 params: params
             });
-        } else return this.http.get<Expense[]>(this._baseUrl);
+        } else { return this.http.get<Expense[]>(this._baseUrl); }
     }
 
     addExpense(expense: Expense) {

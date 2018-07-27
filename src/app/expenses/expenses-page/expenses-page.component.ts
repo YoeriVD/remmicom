@@ -12,9 +12,9 @@ import { ExpensesService } from '../expenses.service';
   styleUrls: ['./expenses-page.component.css']
 })
 export class ExpensesPageComponent implements OnInit {
-  config : any = {
+  config: any = {
     description : 'MyCustomDesc'
-  }
+  };
 
   search = new FormControl();
   search$: Observable<Expense[]>;
